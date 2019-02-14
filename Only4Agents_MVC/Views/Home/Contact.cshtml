@@ -1,0 +1,126 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--Page Title-->
+<section class="page-title" style="background-image: url(../Content/images/background/bg-page-title.jpg);">
+    <div class="auto-container">
+        <div class="sec-title">
+            <h1>Contact Us</h1>
+        </div>
+    </div>
+</section>
+
+<!--Breadcrumb-->
+<div class="breadcrumb-outer">
+    <div class="auto-container">
+        <div class="bread-crumb text-center"><a href="~/Home/Index">Home</a> / <a href="#" class="current">Contact Us</a></div>
+    </div>
+</div>
+
+@{
+    if (TempData["message"] != null)
+    {
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div id="success-alert" class="alert alert-success" style="margin-top: 5%;">
+                    <strong>Mail has been sent to admin. </strong> You will be contacted shortly.
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
+
+    }
+}
+<!--Contact Section-->
+<section class="contact-section">
+    <div class="auto-container">
+
+        <div class="row clearfix">
+
+            <!--Map Column-->
+            <div class="column map-column col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <h2>Our Location on Map</h2>
+                <div style="width: 100%"><iframe width="100%" height="450" src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=8500%20Torbram%20Rd%20%2C%20Unit%23%2054%2C%20Brampton%20L6T%205C6+(Your%20Business%20Name)&ie=UTF8&t=&z=10&iwloc=B&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.mapsdirections.info/en/custom-google-maps/">Create Google Map</a> by <a href="https://www.mapsdirections.info/en/">Measure area on map</a></iframe></div><br />
+             
+            </div>
+
+            <!--Form Column-->
+            <div class="column form-column col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <h2>Send Message</h2>
+                <!--COntact Form-->
+                <div class="inner-box contact-form">
+                    <form method="post" action="Contact" id="contact-form">
+                        <div class="row clearfix">
+                            <!--Form Group-->
+                            <div class="form-group col-md-12 col-xs-12">
+                                <input type="text" name="username" value="" placeholder="Your Name">
+                            </div>
+                            <!--Form Group-->
+                            <div class="form-group col-md-12 col-xs-12">
+                                <input type="text" name="email" value="" placeholder="Your Email">
+                            </div>
+                            <div class="form-group col-md-12 col-xs-12">
+                                <input type="text" name="phn" value="" placeholder="Your Phone No.">
+                            </div>
+                            <!--Form Group-->
+                            <div class="form-group col-md-12 col-xs-12">
+                                <textarea name="message" placeholder="Your Message"></textarea>
+                            </div>
+
+                            <!--Form Group-->
+                            <div class="form-group col-md-12 col-xs-12">
+                                <div class="text-left">
+                                    <button type="submit" id="btnSave" class="theme-btn btn-style-four">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div><!--COntact Form-->
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="auto-container"><hr class="separator no-margin-top no-margin-bottom"></div>
+
+<!--Default Section / Other Info-->
+<section class="default-section other-info padd-top-80 padd-bott-50">
+    <div class="auto-container">
+        <div class="columns-container clearfix">
+            <!--Info Column-->
+            <div class="column info-column col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <h3 class="margin-bott-20">Our Address</h3>
+                <article class="inner-box padd-right-50">
+                    <div class="text margin-bott-30">
+                        Please do get in touch if you would like detailed information
+                        on the lead generation and more services we offer and the technology that we produce.
+                    </div>
+                    <ul class="info-box">
+                        <li><span class="icon flaticon-location"></span><strong>Address</strong> 8500 Torbram Rd , Unit# 54, Brampton L6T 5C6</li>
+                        <li><span class="icon flaticon-technology-22"></span><strong>Phone</strong> <a href="tel:+1 416-844-5725">+1 416-844-5725 <a /></li>
+                        <li><span class="icon flaticon-letter-1"></span><strong>Email</strong> <a href="mailto:info@only4agents.com">info@only4agents.com</a></li>
+                    </ul>
+                </article>
+            </div>
+
+            <!--Image Column-->
+            <div class="column image-column col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <article class="inner-box">
+                    <figure class="image-box"><img src="../Content/images/resource/contact-image.jpg" alt="Contact-image"></figure>
+                </article>
+            </div>
+
+        </div>
+    </div>
+</section>
+<script src="~/Content/js/latest.min.js"></script>
+<script>
+    $("#success-alert").fadeTo(3000, 500).slideUp(500, function () {
+        $("#success-alert").slideUp(500);
+    });
+</script>

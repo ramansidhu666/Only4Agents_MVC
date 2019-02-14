@@ -1,0 +1,3 @@
+User-agent: *
+Allow: http://only4agents.com/sitemap.xml
+

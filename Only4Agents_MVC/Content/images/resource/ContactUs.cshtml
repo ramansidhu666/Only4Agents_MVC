@@ -1,0 +1,312 @@
+﻿  
+@{
+  
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="page-title-banner" class="jx-container contactUs">
+    <div class="jx-container-slope jx-top-slope jx-right-slope"></div>
+    <div class="container jx-titlebar text-center">
+        <div class="sixteen columns">
+            <h1 class="text-center">
+                Contact Us
+                <span class="title-bottom-bar"></span>
+
+            </h1>
+        </div>
+    </div>
+
+    <!-- container slope -->
+</div>
+<div class="jx-container jx-page-titlebar">
+    <div class="jx-container-slope jx-top-slope jx-right-slope"></div>
+    <div class="container jx-titlebar">
+        <div class="sixteen columns">
+            <div class="jx-breadcrumb center">
+                <a href="/RoyalCrown/index">Home</a><span> / Contact Us</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- container slope -->
+</div>
+
+<!-- EDF Header -->
+<!-- BOF Main Content -->
+<div role="main" class="main no-top-padding">
+
+    <!-- BOF Contact Form -->
+
+    <div class="jx-container jx-padding jx-white-bg no-top-padding">
+
+        <!-- BOF Map-->
+        <div class="sixteen columns">
+            <div id="map-canvas">
+                <h1 class="sr-only">Map</h1>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2877.18829975224!2d-79.44837668449578!3d43.85192567911503!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b2b951ebc7353%3A0xbbe2373e105a6c25!2s124+Avenue+Rd%2C+Richmond+Hill%2C+ON+L4C+5E6%2C+Canada!5e0!3m2!1sen!2sin!4v1494251884441" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="contact-us-form">
+        <div class="container">
+            <div class="six columns">
+                <div class="jx-contact-info">
+                    <ul>
+                        <li>
+                            <div class="icon"><i class="fa fa-map-marker"></i></div>
+                            <!-- Contact Info Icon -->
+                            <div class="item-position">
+                                <div class="title">Address</div>
+                                <div class="discription">
+                                    <span>124 Avenue Rd Richmond Hill</span>
+                                </div>
+                            </div>
+                            <!-- Contact Details -->
+
+                        </li>
+
+                        <li>
+                            <div class="icon"><i class="fa fa-phone"></i></div>
+                            <!-- Contact Info Icon -->
+                            <div class="item-position">
+                                <div class="title">Contact Numbers</div>
+                                <div class="discription">
+                                    <div> Phone: (+1) 647-863-3774</div>
+                                    <div> Fax: (+1) 647-863-3774</div>
+                                </div>
+                            </div>
+                            <!-- Contact Details -->
+                        </li>
+
+
+                        <li>
+
+                            <div class="icon"><i class="fa fa-clock-o"></i></div>
+                            <!-- Contact Info Icon -->
+                            <div class="item-position">
+                                <div class="title">Contact E-Mail</div>
+                                <div class="discription">
+                                    <span>royalcrown.stucco@gmail.com</span>
+                                </div>
+                            </div>
+                            <!-- Contact Details -->
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ten columns">
+                <div class="jx-contact-form">
+                    <h6 id="errormessage" style="display:none;color:red"></h6>
+                    <form class="roofing-form">
+                        <div class="expMessage"></div>
+                        <div class="row-1">
+                            <div class="contact-first-name">
+                                <input id="userName" placeholder="Name" name="Name" class="jx-form-text" type="text" required>
+                                <!-- First Name Textbox -->
+                            </div>
+                            <div class="contact-email">
+                                <input id="userEmail" placeholder="Email Address" name="userEmail" class="jx-form-text" type="text" required>
+                                <br>
+                                <!-- Email Name Textbox -->
+                            </div>
+                        </div>
+                        <div class="row-1">
+                            <div class="contact-first-name">
+                                <input id="userPhone" placeholder="Phone No" name="userPhone" class="jx-form-text" type="text" required>
+                                <!-- First Name Textbox -->
+                            </div>
+                            <div class="contact-email">
+                                <input id="userSubject" placeholder="Subject" name="userSubject" class="jx-form-text" type="text" required>
+                                <br>
+                                <!-- Email Name Textbox -->
+                            </div>
+                        </div>
+
+                        <div class="row-1">
+                            <div class="contact-message">
+                                <textarea id="Message" class="jx-form-textarea" name="Message" rows="5" cols="30" required placeholder="Enter Your Message Here..."></textarea>
+                                <!-- Message Box -->
+                            </div>
+                            <input type="hidden" name="action" value="submitform">
+                            <div class="contact-submit">
+
+                                <button type="button" onclick="send()" class="jx-submit" value="submit"> Submit</button>
+                                <!-- Submit Button -->
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>    
+<script>
+    function send() {
+        $('#errormessage').empty();
+        if (ValidUsername() && ValidEmail() && ValidPhone() && ValidSubject() && Validmessage()) {
+            var person = {
+                name: $("#userName").val(),
+                email: $("#userEmail").val(),
+                phone: $("#userPhone").val(),
+                subject: $("#userSubject").val(),
+                Message: $("#Message").val(),
+            }
+
+            $('#target').html('sending..');
+
+            $.ajax({
+                url: '/royalcrown/sendmail',
+                type: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    alert('Email send successfully.');
+                    Empty_Controls();
+                },
+                data: person
+            });
+        }
+        else {
+            return false;
+        }
+    }
+    function ValidUsername() {
+        
+        //first name validation
+        var firstname = $("#userName").val();
+        if (firstname !== '') {
+            if (!/^[a-zA-Z]*$/g.test(firstname)) {
+                $("#userName").addClass('validation_control');
+                error_message("Enter only valid character.")
+                return false;
+            } else if (firstname.length > 30) {
+               
+                error_message("Firstname cannot exceed more than 30 characters.")
+                return false;
+            }
+            else {
+                $('#errormessage').css('display', 'none');
+                return true;
+            }
+        }
+        else {            
+            error_message("Must enter username.")
+        }
+
+        //End
+
+    }
+   
+    function ValidEmail() {
+       
+        //Email validation
+        var Email = $("#userEmail").val();
+        if (Email !== '') {
+            var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+            if (Email.length > 30) {
+               
+                error_message("Email length cannot exceed more than 30 characters.")
+                return false;
+            } else if (!emailReg.test(Email)) {
+              
+                error_message("Please enter the valid email.")
+                return false;
+            }
+            else {
+                $("#userEmail").removeClass('validation_control');
+                return true;
+            }
+        }
+        else {
+            
+            error_message("Must enter emails.");
+            return false;
+        }
+
+        //End
+    }
+    function ValidPhone() {
+        //phone no. validation
+        var phone = $("#userPhone").val();
+        if (phone !== '') {
+            var phonereg = /^\d{3}-\d{3}-\d{4}$/;
+            if (phone.length > 12) {               
+                error_message("Phone no. length cannot exceed more than 12 characters.");
+                return false;
+            }
+                // else if (!phonereg.test(phone)) {
+                //    $("#userPhone").addClass('validation_control');
+                //    alert('please enter the valid phone no.');
+                //    return false;
+                //}
+            else {
+                $("#userPhone").removeClass('validation_control');
+                return true;
+            }
+        }
+        else {
+           
+            error_message("Must enter phone no.");
+            return false;
+        }
+
+
+        //end
+    }
+    function ValidSubject() {
+        //subject validation
+        var subject = $("#userSubject").val();
+        if (subject !== '') {
+            if (subject.length > 50) {
+               
+                error_message("Subject length cannot exceed more than 50 characters.");
+                return false;
+            }
+            else {
+                $("#userSubject").removeClass('validation_control');
+                return true;
+            }
+        }
+        else {
+           
+            error_message("must enter subject.");
+        }
+
+        //end
+    }
+    function Validmessage() {
+        //subject validation
+        var subject = $("#userSubject").val();
+        if (subject.length > 500) {
+           
+            error_message("Message length cannot exceed more than 500 characters.");
+            return false;
+        }
+        else {
+            return true;
+        }
+        //end
+    }
+
+    function error_message(txt) {
+        $('#errormessage').empty();
+        $('#errormessage').text(txt);
+        $('#errormessage').css('display', 'block');
+    }
+
+    function Empty_Controls() {
+        $("#userName").val('');
+        $("#userEmail").val('');
+        $("#userPhone").val('');
+        $("#userSubject").val('');
+        $("#Message").val('');
+    }
+
+   </script>
